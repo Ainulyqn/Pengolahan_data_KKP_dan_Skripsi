@@ -7,8 +7,6 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-$username = $_SESSION['username'];
-
 // Koneksi ke database
 $host = 'localhost';
 $dbUsername = 'root'; // Ganti dengan username database Anda
@@ -59,6 +57,11 @@ if (isset($_POST['submit'])) {
     <title>Submit KKP</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
         .navbar-brand img {
             width: 30px;
             height: 30px;
@@ -71,25 +74,8 @@ if (isset($_POST['submit'])) {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="index.php">
-            <img src="img/UPB.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            <?php echo $username; ?>
+            <img src="../img/UPB.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="submit_kkp.php">Submit KKP</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="edit_kkp.php">Edit KKP</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="waiting_list.php">Waiting List</a>
-                </li>
-            </ul>
-        </div>
         <div class="navbar-nav ml-auto">
             <a class="nav-link" href="index.php">Keluar</a>
         </div>
@@ -118,7 +104,7 @@ if (isset($_POST['submit'])) {
         </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
