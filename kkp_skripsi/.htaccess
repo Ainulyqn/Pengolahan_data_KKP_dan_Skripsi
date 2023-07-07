@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteBase /kkp_skripsi/
+RewriteRule ^$ login.php [L]
