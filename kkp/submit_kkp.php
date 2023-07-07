@@ -7,6 +7,8 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
+$username = $_SESSION['username'];
+
 // Koneksi ke database
 $host = 'localhost';
 $dbUsername = 'root'; // Ganti dengan username database Anda
@@ -23,6 +25,7 @@ if (mysqli_connect_errno()) {
 // Proses pengiriman data KKP
 if (isset($_POST['submit'])) {
     // Ambil data dari form
+    $id = $_POST['id'];
     $nama = $_POST['nama'];
     $judul = $_POST['judul'];
     $dosen_pembimbing = $_POST['dosen_pembimbing'];
@@ -34,18 +37,20 @@ if (isset($_POST['submit'])) {
     $file_path = 'uploads/' . $file_name;
 
     // Pindahkan file yang diunggah ke direktori tujuan
-    move_uploaded_file($file_tmp, $file_path);
+    if (move_uploaded_file($file_tmp, $file_path)) {
+        // Query untuk menyimpan data ke database
+        $query = "INSERT INTO kkp (id, nama, judul, dosen_pembimbing, tanggal_upload, file) VALUES ('$id', '$nama', '$judul', '$dosen_pembimbing', '$tanggal_upload', '$file_path')";
 
-    // Query untuk menyimpan data ke database
-    $query = "INSERT INTO submit_kkp (nama, judul, dosen_pembimbing, tanggal_upload, file) VALUES ('$nama', '$judul', '$dosen_pembimbing', '$tanggal_upload', '$file_path')";
-
-    // Eksekusi query
-    if (mysqli_query($conn, $query)) {
-        // Redirect ke halaman waiting_list.php setelah data berhasil disimpan
-        header("Location: waiting_list.php");
-        exit;
+        // Eksekusi query
+        if (mysqli_query($conn, $query)) {
+            // Redirect ke halaman list_kkp.php setelah data berhasil disimpan
+            header("Location: list_kkp.php");
+            exit;
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "Gagal mengunggah file.";
     }
 }
 ?>
@@ -77,13 +82,17 @@ if (isset($_POST['submit'])) {
             <img src="../img/UPB.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">
         </a>
         <div class="navbar-nav ml-auto">
-            <a class="nav-link" href="index.php">Keluar</a>
+            <a class="nav-link" href="../index.php">Keluar</a>
         </div>
     </nav>
 
     <div class="container mt-4">
         <h2>Submit KKP</h2>
         <form method="post" action="submit_kkp.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" name="id" id="id" class="form-control" required>
+            </div>
             <div class="form-group">
                 <label for="nama">Nama:</label>
                 <input type="text" name="nama" id="nama" class="form-control" required>

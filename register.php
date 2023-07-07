@@ -45,7 +45,7 @@ mysqli_close($conn);
 <html>
 <head>
     <title>Pendaftaran Pengguna</title>
-    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link rel="stylesheet" type="text/css" href="css/stylereg.css">
 </head>
 <body>
     <div class="container">

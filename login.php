@@ -31,19 +31,14 @@ if (isset($_POST['login'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Halaman Login</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/stylelogin.css">
 </head>
-
 <body>
     <div class="container">
         <h2>Login</h2>
-        <?php if ($error !== '') { ?>
-            <div class="alert"><?php echo $error; ?></div>
-        <?php } ?>
-        <form method="post" action="">
+        <form method="post" action="login.php">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" required>
@@ -54,7 +49,7 @@ if (isset($_POST['login'])) {
             </div>
             <button type="submit" name="login">Login</button>
         </form>
+        <p>Belum punya akun? <a href="register.php">Daftar disini</a></p>
     </div>
 </body>
-
 </html>
