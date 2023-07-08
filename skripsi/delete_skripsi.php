@@ -7,13 +7,13 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-// Periksa apakah ID KKP telah diberikan
+// Periksa apakah ID Skripsi telah diberikan
 if (!isset($_GET['id'])) {
     header("Location: index.php");
     exit;
 }
 
-$kkpId = $_GET['id'];
+$skripsiId = $_GET['id'];
 
 // Koneksi ke database
 $host = 'localhost';
@@ -28,21 +28,21 @@ if (mysqli_connect_errno()) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-// Query untuk mendapatkan data KKP berdasarkan ID
-$query = "SELECT * FROM kkp WHERE id = $kkpId";
+// Query untuk mendapatkan data Skripsi berdasarkan ID
+$query = "SELECT * FROM skripsi WHERE id = $skripsiId";
 $result = mysqli_query($conn, $query);
 
-// Periksa apakah KKP ditemukan
+// Periksa apakah Skripsi ditemukan
 if (mysqli_num_rows($result) == 0) {
     header("Location: index.php");
     exit;
 }
 
-$kkp = mysqli_fetch_assoc($result);
+$skripsi = mysqli_fetch_assoc($result);
 
 // Hapus file jika ada
-if (isset($kkp['file'])) {
-    $file = $kkp['file'];
+if (isset($skripsi['file'])) {
+    $file = $skripsi['file'];
     $fileDir = "uploads/";
     $filePath = $fileDir . $file;
     if (file_exists($filePath)) {
@@ -50,8 +50,8 @@ if (isset($kkp['file'])) {
     }
 }
 
-// Query untuk menghapus data KKP berdasarkan ID
-$deleteQuery = "DELETE FROM kkp WHERE id = $kkpId";
+// Query untuk menghapus data Skripsi berdasarkan ID
+$deleteQuery = "DELETE FROM skripsi WHERE id = $skripsiId";
 if (mysqli_query($conn, $deleteQuery)) {
     header("Location: ../index.php");
     exit;

@@ -22,13 +22,13 @@ if (mysqli_connect_errno()) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-// Proses pengiriman data KKP
+// Proses pengiriman data skripsi
 if (isset($_POST['submit'])) {
     // Ambil data dari form
     $id = $_POST['id'];
-    $nama = $_POST['nama'];
     $judul = $_POST['judul'];
-    $dosen_pembimbing = $_POST['dosen_pembimbing'];
+    $penulis = $_POST['penulis'];
+    $pembimbing = $_POST['pembimbing'];
     $tanggal_upload = date('Y-m-d');
 
     // Proses unggah file
@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
     // Pindahkan file yang diunggah ke direktori tujuan
     if (move_uploaded_file($file_tmp, $file_path)) {
         // Query untuk menyimpan data ke database
-        $query = "INSERT INTO kkp (id, nama, judul, dosen_pembimbing, tanggal_upload, file) VALUES ('$id', '$nama', '$judul', '$dosen_pembimbing', '$tanggal_upload', '$file_path')";
+        $query = "INSERT INTO skripsi (id, judul, penulis, pembimbing, tanggal_upload, file) VALUES ('$id', '$judul', '$penulis', '$pembimbing', '$tanggal_upload', '$file_path')";
 
         // Eksekusi query
         if (mysqli_query($conn, $query)) {
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Submit KKP</title>
+    <title>Submit Skripsi</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .navbar-brand {
@@ -84,29 +84,29 @@ if (isset($_POST['submit'])) {
     </nav>
 
     <div class="container mt-4">
-        <h2>Submit KKP</h2>
+        <h2>Submit Skripsi</h2>
         <?php
         // Periksa apakah file telah diunggah
         if (isset($file_path)) {
             echo "<p>File berhasil diunggah. Download file <a href='$file_path'>di sini</a>.</p>";
         }
         ?>
-        <form method="post" action="submit_kkp.php" enctype="multipart/form-data">
+        <form method="post" action="submit_skripsi.php" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="id">ID:</label>
                 <input type="text" name="id" id="id" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="nama">Nama:</label>
-                <input type="text" name="nama" id="nama" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="judul">Judul:</label>
                 <input type="text" name="judul" id="judul" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="dosen_pembimbing">Dosen Pembimbing:</label>
-                <input type="text" name="dosen_pembimbing" id="dosen_pembimbing" class="form-control" required>
+                <label for="penulis">Penulis:</label>
+                <input type="text" name="penulis" id="penulis" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pembimbing">Pembimbing:</label>
+                <input type="text" name="pembimbing" id="pembimbing" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="file">File:</label>

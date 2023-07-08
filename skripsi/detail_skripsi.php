@@ -7,13 +7,13 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-// Periksa apakah ID KKP telah diberikan
+// Periksa apakah ID Skripsi telah diberikan
 if (!isset($_GET['id'])) {
     header("Location: index.php");
     exit;
 }
 
-$kkpId = $_GET['id'];
+$skripsiId = $_GET['id'];
 
 // Koneksi ke database
 $host = 'localhost';
@@ -28,17 +28,17 @@ if (mysqli_connect_errno()) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-// Query untuk mendapatkan data KKP berdasarkan ID
-$query = "SELECT * FROM kkp WHERE id = $kkpId";
+// Query untuk mendapatkan data Skripsi berdasarkan ID
+$query = "SELECT * FROM skripsi WHERE id = $skripsiId";
 $result = mysqli_query($conn, $query);
 
-// Periksa apakah KKP ditemukan
+// Periksa apakah Skripsi ditemukan
 if (mysqli_num_rows($result) == 0) {
     header("Location: index.php");
     exit;
 }
 
-$kkp = mysqli_fetch_assoc($result);
+$skripsi = mysqli_fetch_assoc($result);
 
 mysqli_close($conn);
 ?>
@@ -46,7 +46,7 @@ mysqli_close($conn);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Detail KKP</title>
+    <title>Detail Skripsi</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .container {
@@ -68,37 +68,37 @@ mysqli_close($conn);
 </head>
 <body>
     <div class="container">
-        <h2>Detail KKP</h2>
+        <h2>Detail Skripsi</h2>
         <div class="form-group row">
             <label for="id" class="col-sm-2 col-form-label">ID</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id" value="<?php echo $kkp['id']; ?>" readonly>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" value="<?php echo $kkp['nama']; ?>" readonly>
+                <input type="text" class="form-control" id="id" value="<?php echo $skripsi['id']; ?>" readonly>
             </div>
         </div>
         <div class="form-group row">
             <label for="judul" class="col-sm-2 col-form-label">Judul</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="judul" value="<?php echo $kkp['judul']; ?>" readonly>
+                <input type="text" class="form-control" id="judul" value="<?php echo $skripsi['judul']; ?>" readonly>
             </div>
         </div>
         <div class="form-group row">
-            <label for="dosen_pembimbing" class="col-sm-2 col-form-label">Dosen Pembimbing</label>
+            <label for="penulis" class="col-sm-2 col-form-label">Penulis</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="dosen_pembimbing" value="<?php echo $kkp['dosen_pembimbing']; ?>" readonly>
+                <input type="text" class="form-control" id="penulis" value="<?php echo $skripsi['penulis']; ?>" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="pembimbing" class="col-sm-2 col-form-label">Pembimbing</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="pembimbing" value="<?php echo $skripsi['pembimbing']; ?>" readonly>
             </div>
         </div>
         <div class="form-group row">
             <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
             <div class="col-sm-10">
                 <?php
-                if (isset($kkp['tanggal'])) {
-                    $tanggalFormatted = date('d F Y', strtotime($kkp['tanggal']));
+                if (isset($skripsi['tanggal_upload'])) {
+                    $tanggalFormatted = date('d F Y', strtotime($skripsi['tanggal_upload']));
                     echo '<input type="text" class="form-control" id="tanggal" value="' . $tanggalFormatted . '" readonly>';
                 } else {
                     echo '<input type="text" class="form-control" id="tanggal" value="Tanggal tidak tersedia" readonly>';
@@ -110,8 +110,8 @@ mysqli_close($conn);
             <label for="file" class="col-sm-2 col-form-label">File</label>
             <div class="col-sm-10">
                 <?php
-                if (isset($kkp['file'])) {
-                    echo '<input type="text" class="form-control" id="file" value="' . $kkp['file'] . '" readonly>';
+                if (isset($skripsi['file'])) {
+                    echo '<input type="text" class="form-control" id="file" value="' . $skripsi['file'] . '" readonly>';
                 } else {
                     echo '<input type="text" class="form-control" id="file" value="File tidak tersedia" readonly>';
                 }
@@ -119,8 +119,8 @@ mysqli_close($conn);
             </div>
         </div>
         <div class="form-group">
-            <a href="edit_kkp.php?id=<?php echo $kkpId; ?>" class="btn btn-primary btn-edit">Edit</a>
-            <a href="delete_kkp.php?id=<?php echo $kkpId; ?>" class="btn btn-danger">Hapus</a>
+            <a href="edit_skripsi.php?id=<?php echo $skripsiId; ?>" class="btn btn-primary btn-edit">Edit</a>
+            <a href="delete_skripsi.php?id=<?php echo $skripsiId; ?>" class="btn btn-danger">Hapus</a>
         </div>
         <a href="../index.php" class="btn btn-secondary">Kembali ke Halaman Utama</a>
     </div>

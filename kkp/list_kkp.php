@@ -40,6 +40,23 @@ if (isset($_POST['edit'])) {
     }
 }
 
+// Proses penghapusan data KKP
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+
+    // Query untuk menghapus data KKP
+    $query = "DELETE FROM kkp WHERE id=$id";
+
+    // Eksekusi query
+    if (mysqli_query($conn, $query)) {
+        // Redirect ke halaman list_kkp.php setelah data berhasil dihapus
+        header("Location: list_kkp.php");
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
 // Query untuk mendapatkan daftar data KKP yang telah disubmit
 $query = "SELECT * FROM kkp";
 $result = mysqli_query($conn, $query);
@@ -101,7 +118,13 @@ $result = mysqli_query($conn, $query);
                     echo "<td>" . $row['dosen_pembimbing'] . "</td>";
                     echo "<td>" . $row['tanggal_upload'] . "</td>";
                     echo "<td><a href='" . $row['file'] . "'>Download</a></td>";
-                    echo "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editModal" . $row['id'] . "'>Edit</button></td>";
+                    echo "<td>";
+                    echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editModal" . $row['id'] . "'>Edit</button>";
+                    echo "<form method='post' class='d-inline-block'>";
+                    echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+                    echo "<button type='submit' name='delete' class='btn btn-danger'>Hapus</button>";
+                    echo "</form>";
+                    echo "</td>";
                     echo "</tr>";
                     $no++;
                 }
@@ -144,19 +167,19 @@ $result = mysqli_query($conn, $query);
                                 <label for="dosen_pembimbing">Dosen Pembimbing:</label>
                                 <input type="text" name="dosen_pembimbing" id="dosen_pembimbing" class="form-control" value="<?php echo $dosen_pembimbing; ?>" required>
                             </div>
-                            <button type="submit" name="edit" class="btn btn-primary">Simpan</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php
-    }
-    ?>
+                            <button type="submit"
+                            name="edit" class="btn btn-primary">Simpan</button>
+                            </form>
+</div>
+</div>
+</div>
+</div>
+<?php
+ }
+ ?>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

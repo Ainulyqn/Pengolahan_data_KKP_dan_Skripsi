@@ -43,7 +43,6 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,158 +79,127 @@ if (isset($_POST['submit'])) {
             color: #fff;
             font-size: 24px;
             font-weight: bold;
-            padding: 15px;
+            padding: 20px;
             border-bottom: none;
             border-radius: 10px 10px 0 0;
         }
 
         .card-body {
-            padding: 20px;
+            padding: 30px;
         }
 
-        .kkp-title,
-        .skripsi-title {
-            color: #343a40;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .kkp-option,
-        .skripsi-option {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .kkp-option li,
-        .skripsi-option li {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-        }
-
-        .kkp-option li:last-child,
-        .skripsi-option li:last-child {
-            border-bottom: none;
-        }
-
-        .kkp-option li:hover,
-        .skripsi-option li:hover {
-            background-color: #f8f9fa;
-        }
-
-        .kkp-option li .option-title,
-        .skripsi-option li .option-title {
+        .option-title {
             font-size: 18px;
             font-weight: bold;
             color: #343a40;
         }
 
-        .kkp-option li .option-description,
-        .skripsi-option li .option-description {
+        .option-description {
             font-size: 14px;
             color: #666;
             margin-top: 5px;
+        }
+
+        .submit-option,
+        .peserta-option {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
+        }
+
+        .container .col-md-4 {
+            flex-basis: 30%;
+            margin-right: 10px;
+        }
+
+        .iframe-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%; /* Mengatur rasio aspek 16:9 */
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .exit-button {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Main Menu</a>
+        <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="kkp/submit_kkp.php">KKP</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="skripsi.php">Skripsi</a>
-                </li>
-            </ul>
-        </div>
         <div class="navbar-nav ml-auto">
             <a class="nav-link" href="logout.php">Logout (<?php echo $username; ?>)</a>
         </div>
     </nav>
-    <div class="container mt-4">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="container">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="kkp-title">Pilihan KKP</h4>
+                    <h4>Submit</h4>
                 </div>
                 <div class="card-body">
-                    <ul class="kkp-option">
-                        <?php
-                        // Query untuk mendapatkan daftar data KKP yang telah disubmit
-                        $query = "SELECT * FROM kkp";
-                        $result = mysqli_query($conn, $query);
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<li>';
-                            echo '<div class="option-title">' . $row['nama'] . '</div>';
-                            if (isset($row['deskripsi'])) {
-                                echo '<div class="option-description">' . $row['deskripsi'] . '</div>';
-                            } else {
-                                echo '<div class="option-description">Deskripsi KKP tidak tersedia</div>';
-                            }
-                            echo '<div class="option-actions">';
-                            echo <a href="detail.php?id=<?php echo $row['id']; ?>" 
-                              echo  class="btn btn-primary">Detail</a>
-                                <a href="edit.php?id=<?php echo $row['id']; ?>"                         
-                                class="btn btn-success">Edit</a>
-                                 <a href="delete.php?id=<?php echo $row['id']; ?>"
-                                class="btn btn-danger">Hapus</a>
-                            
-                            echo '</div>';
-                            echo '</li>';
-                        }
-                        ?>
-                    </ul>
+                    <div class="submit-option">
+                        <div class="option-title">Submit</div>
+                        <div class="option-description">Submit KKP atau Skripsi baru</div>
+                        <div class="option-actions">
+                            <a href="kkp/submit_kkp.php" class="btn btn-primary">Submit KKP</a>
+                            <a href="skripsi/submit_skripsi.php" class="btn btn-success">Submit Skripsi</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="skripsi-title">Pilihan Skripsi</h4>
+                    <h4>Peserta KKP</h4>
                 </div>
                 <div class="card-body">
-                    <ul class="skripsi-option">
-                        <?php
-                        // Query untuk mendapatkan daftar data Skripsi yang telah disubmit
-                        $query = "SELECT * FROM skripsi";
-                        $result = mysqli_query($conn, $query);
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<li>';
-                            echo '<div class="option-title">' . $row['nama'] . '</div>';
-                            if (isset($row['deskripsi'])) {
-                                echo '<div class="option-description">' . $row['deskripsi'] . '</div>';
-                            } else {
-                                echo '<div class="option-description">Deskripsi Skripsi tidak tersedia</div>';
-                            }
-                            echo '<div class="option-actions">';
-                            echo '<a href="#" class="btn btn-primary btn-sm">Detail</a>';
-                            echo '<a href="#" class="btn btn-success btn-sm">Edit</a>';
-                            echo '<a href="#" class="btn btn-danger btn-sm">Hapus</a>';
-                            echo '</div>';
-                            echo '</li>';
-                        }
-                        ?>
-                    </ul>
+                    <div class="peserta-option">
+                        <div class="option-title">Peserta KKP</div>
+                        <div class="option-description">Daftar peserta KKP yang telah terdaftar</div>
+                        <div class="option-actions">
+                            <a href="kkp/list_kkp.php" class="btn btn-primary">Lihat Peserta KKP</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Peserta Skripsi</h4>
+                </div>
+                <div class="card-body">
+                    <div class="peserta-option">
+                        <div class="option-title">Peserta Skripsi</div>
+                        <div class="option-description">Daftar peserta Skripsi yang telah terdaftar</div>
+                        <div class="option-actions">
+                            <a href="skripsi/list_skripsi.php" class="btn btn-primary">Lihat Peserta Skripsi</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
