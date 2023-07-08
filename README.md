@@ -51,11 +51,11 @@ Dengan adanya aplikasi "Pengumpulan Data KKP dan Skripsi", diharapkan mahasiswa 
 
 ## Link Youtube<br>
 
-Berikut link youtube kelompok kami :<br> 
+Berikut link youtube kelompok kami : [click Here](https://youtu.be/odifDzXap2s) <br>
 
 ## Link Web Hosting (Demo Program)<br>
 
-Berikut link web hosting kelompok kami : <br>
+Berikut link web hosting kelompok kami : [click Here](https://github.com/Ainulyqn/Pengolahan_data_KKP_dan_Skripsi) <br>
 
 
 ## Terima Kasih!
