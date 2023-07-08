@@ -55,7 +55,7 @@ Berikut link youtube kelompok kami : [click Here](https://youtu.be/odifDzXap2s) 
 
 ## Link Web Hosting (Demo Program)<br>
 
-Berikut link web hosting kelompok kami : [click Here](https://github.com/Ainulyqn/Pengolahan_data_KKP_dan_Skripsi) <br>
+Berikut link web hosting kelompok kami : [click Here](http://kkpdanskripsi.byethost9.com) <br>
 
 
 ## Terima Kasih!
