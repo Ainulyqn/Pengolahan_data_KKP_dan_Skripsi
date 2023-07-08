@@ -11,7 +11,7 @@
 ## Rancangan Database
 Berikut perancangan database yang kami buat dalam aplikasi "Pengolahaan Data KKP dan Skripsi" <br>
 ![img](img/db1.png) <br>
-![img](dimg/b2.png) <br>
+![img](img/db2.png) <br>
 ![img](img/db3.png) <br> 
 ![img](img/db4.png) <br>
 ![img](img/db5.png) <br>
