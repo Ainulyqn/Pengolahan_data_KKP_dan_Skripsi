@@ -6,7 +6,7 @@
 | --------------- | ---------------------------- |
 | **312010423**   | AINUL YAQIN                  |
 | **312010443**   | MUHAMMAD BISMA PUTRA HARYANA |
-| **312110594**   |                              |
+| **312110594**   | JOHN DAVID WILLY PANJAITAN   |
 
 ## Rancangan Database
 Berikut perancangan database yang kami buat dalam aplikasi "Pengolahaan Data KKP dan Skripsi" <br>
@@ -20,7 +20,7 @@ Berikut perancangan database yang kami buat dalam aplikasi "Pengolahaan Data KKP
 ### Tampilan login <br>
 ![img](img/login.png) <br>
 ### Tampilan setelah login <br>
-![img](img/login.png) <br>
+![img](img/login2.png) <br>
 Aplikasi "Pengolahan Data KKP dan Skripsi" adalah sebuah aplikasi yang dirancang untuk memudahkan mahasiswa dalam proses pengolah dan pengumpulan, pengeditan, penghapusan, melihat detail, dan penyimpanan laporan KKP (Kerja Kepentingan Perkuliahan) dan skripsi. Aplikasi ini bertujuan untuk menyederhanakan dan mengotomatisasi beberapa aspek penting dalam proses akademik ini, sehingga memungkinkan mahasiswa untuk lebih fokus pada penelitian mereka.<br>
 
 ##Fitur utama dalam aplikasi ini meliputi: <br>
